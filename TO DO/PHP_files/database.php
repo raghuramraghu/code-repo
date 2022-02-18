@@ -1,30 +1,33 @@
 <?php
-function  database($server_name,$username,$password,$dbname){
-    $conn= new mysqli($server_name,$username,$password,$dbname);
-    if($conn->connect_error){
-        print "connection failed".$conn->connect_error;
-    }else{
-        print "connection success";
+//include 'database.php';
+class database {
+    private $conn;
+    private $sql;
+    public $servername;
+    public $username;
+    public $password;
+    public $dbname;
+
+    public function __construct($sname,$uname,$pass,$dname){
+        $this->servername = $sname;
+        $this->username = $uname;
+        $this->password = $pass;
+        $this->dbname = $dname;
     }
-
+    public function get_connection(){
+        $conn =new mysqli($this->servername,$this->username,$this->password,$this->dbname);
+        if($conn->connect_error){
+            print "connection error".$conn->connect_error;
+        }else{
+            print "connection success";
+        }
     }
-
-   
-
-    // $sql="INSERT INTO contacts VALUES (1,'thiru','kallai')";
+}
+    
 
 
-    // if ($conn->query($sql) === TRUE) {
-    //     echo "New record created successfully";
-    // } else {
-    //     echo "Error: " . $sql . "<br>" . $conn->error;
-    // }
-    // $connection=new database('localhost','raghu','password','person')
-
-
-
-
-database('localhost','raghu','75300','user_data');
+$data = new database("localhost","raghu","75300","user_data");
+$data->get_connection();
 
 
 ?>
