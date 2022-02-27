@@ -1,12 +1,9 @@
 <?php
-//include 'database.php';
 class database {
-    private $conn;
-    private $sql;
-    public $servername;
-    public $username;
-    public $password;
-    public $dbname;
+    private $servername;
+    private $username;
+    private $password;
+    private $dbname;
 
     public function __construct($sname,$uname,$pass,$dname){
         $this->servername = $sname;
@@ -14,14 +11,15 @@ class database {
         $this->password = $pass;
         $this->dbname = $dname;
     }
-    public function get_connection(){
+    public function get_connection($uname,$mail,$pwd){
         $conn =new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         if($conn->connect_error){
             print "connection error".$conn->connect_error;
         }else{
-            print "connection success";
+            echo "connection success\n";
+
         }
-        $sql = "INSERT INTO user_inputs(id,username,email,password) VALUES(1,'raghu','raghu@gmail.com','somthing123')";
+        $sql = "INSERT INTO user_inputs(username,email,password) VALUES('$uname','$mail','$pwd')";
         if($conn->query($sql)==TRUE){
             print "record created succesfully";
         }else{
@@ -35,8 +33,7 @@ class database {
     
 
 
-$data = new database("localhost","raghu","75300","user_data");
-$data->get_connection();
+
 
 
 ?>
