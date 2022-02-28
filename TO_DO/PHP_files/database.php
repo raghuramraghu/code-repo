@@ -14,9 +14,9 @@ class database {
     public function get_connection($uname,$mail,$pwd){
         $conn =new mysqli($this->servername,$this->username,$this->password,$this->dbname);
         if($conn->connect_error){
-            print "connection error".$conn->connect_error;
+           return false;
         }else{
-            echo "connection success\n";
+            return true;
 
         }
         $sql = "INSERT INTO user_inputs(username,email,password) VALUES('$uname','$mail','$pwd')";
