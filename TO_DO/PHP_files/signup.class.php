@@ -7,19 +7,17 @@ function passwords_hash($pass){
 //$pss_hash =passwords_hash($_POST['password']) ;
 function user_input($username,$email,$pass){
 	$data = new database("localhost","raghu","75300","user_data");
-	$data->get_connection($username,$email,$pass);
 
-}
-// this function makes redirect
-function redirect($url) {
-
+	if ($data->get_connection($username,$email,$pass)===true){
+		ob_start();
+		header('Location: '."http://localhost/php_files_here/TO_DO/");
+		ob_end_flush();
+	}else{
+		echo"somthing error in reloding a page";
 	}
-$input = user_input($_POST['username'],$_POST['email'],passwords_hash($_POST['password']));
-if($input == true){
-	ob_start();
-	header('Location: '."http://localhost:63342/php_files_here/TO_DO/index.html?_ijt=p86mvu8frovtkrcj11iee3i46o&_ij_reload=RELOAD_ON_SAVE");
-	ob_end_flush();
-	die();
 
 }
+
+$input = user_input($_POST['username'],$_POST['email'],passwords_hash($_POST['password']));
+
 ?>
